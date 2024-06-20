@@ -60,7 +60,18 @@ class KategoriController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'kategori'=>'required|in:A,M,BHP,BTHP',
+            'deskripsi'=>'required|max:255',    
+        ]);
+
+        $category = Kategori::find($id);
+        if(is_null($category)){
+            return response()->json(['message'=>'Record not found'], 404);
+        } else {
+            $category->update($request->all());
+            return response()->json($category);
+        }
     }
 
     /**
