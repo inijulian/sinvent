@@ -68,6 +68,9 @@ class KategoriController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $category = Kategori::findOrFail($id);
+        $category->delete();
+        
+        return response()->json(['message'=>'Record Deleted']);
     }
 }
