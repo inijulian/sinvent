@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class KategoriController extends Controller
 {
@@ -44,7 +47,12 @@ class KategoriController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $categories = Kategori::find($id);
+        if(is_null($categories)){
+            return response()->json(['message'=>'id not found'], 404);
+        } else {
+        return response()->json($categories);
+        }
     }
 
     /**
