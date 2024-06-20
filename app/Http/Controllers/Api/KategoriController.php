@@ -22,7 +22,21 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'kategori'=>'required|in:A,M,BHP,BTHP',
+            'deskripsi'=>'required|max:255',    
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors(),422);
+        }
+
+        $categories = Kategori::create([
+            'kategori'=>$request->kategori,
+            'deskripsi'=>$request->deskripsi,
+        ]);
+
+        return response()->json($categories, 201);
     }
 
     /**
