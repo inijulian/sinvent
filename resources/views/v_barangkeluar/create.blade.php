@@ -10,7 +10,7 @@
                             @csrf
 
                     <div class="form-group">
-    <label class="font-weight-bold">Tanggal Keluar</label>
+    <label class="font-weight-bold">TGL_KELUAR</label>
     <input type="date" class="form-control @error('tgl_keluar') is-invalid @enderror" name="tgl_keluar" value="{{ old('tgl_keluar', date('Y-m-d')) }}" placeholder="Masukkan Tanggal Keluar">
     
     <!-- pesan kesalahan untuk tgl_keluar -->
@@ -22,7 +22,7 @@
 </div>
     
                             <div class="form-group">
-                                <label class="font-weight-bold">STOK BARANG KELUAR</label>
+                                <label class="font-weight-bold">Quantity Keluar</label>
                                 <input type="text" class="form-control @error('qty_keluar') is-invalid @enderror" name="qty_keluar" value="{{ old('qty_keluar') }}" placeholder="Masukkan Quantity">
                             
                                 <!-- error message untuk nis -->

@@ -3,46 +3,61 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8">
-               <div class="card border-0 shadow rounded">
+            <div class="col-md-12">
+                <div class="card">
                     <div class="card-body">
+                        <form action="{{ route('barangmasuk.store') }}" method="POST" enctype="multipart/form-data">                    
                             @csrf
-                        <table class="table">
-                            <tr>
-                                <td>Merk</td>
-                                <td>{{ $rsetBarang->merk }}</td>
-                            </tr>
-                            <tr>
-                                <td>Seri</td>
-                                <td>{{ $rsetBarang->seri }}</td>
-                            </tr>
-                            <tr>
-                                <td>Spesifikasi</td>
-                                <td>{{ $rsetBarang->spesifikasi }}</td>
-                            </tr>
-                            <tr>
-                                <td>Stok</td>
-                                <td>{{ $rsetBarang->stok }}</td>
-                            </tr>
-                            <tr>
-                                <td>Kategori ID</td>
-                                <td>{{ $rsetBarang->kategori_id }}</td>
-                            </tr>
-                            <tr>
-                                <td>Deskripsi Kategori</td>
-                                <td>{{ $deskripsiKategori->kategori->deskripsi }}</td>
-                            </tr>
-                        </table>
-                    </div>
-               </div>
-            </div>
-        </div>
-        <div class="flex">
-   
-            <div class="col-md-12  text-center">
-                
 
-            <a href="javascript:history.back()" class="btn btn-md btn-primary mt-3 mb-3">Back</a>
+                          <div class="form-group">
+    <label class="font-weight-bold">TGL_MASUK</label>
+    <input type="date" class="form-control @error('tgl_masuk') is-invalid @enderror" name="tgl_masuk" value="{{ old('tgl_masuk', date('Y-m-d')) }}" placeholder="Masukkan Tanggal Masuk">
+    
+    <!-- pesan kesalahan untuk tgl_masuk -->
+    @error('tgl_masuk')
+        <div class="alert alert-danger mt-2">
+            {{ $message }}
+        </div>
+    @enderror
+</div>
+
+
+                            <div class="form-group">
+                                <label class="font-weight-bold">QTY</label>
+                                <input type="text" class="form-control @error('nis') is-invalid @enderror" name="qty_masuk" value="{{ old('nis') }}" placeholder="Masukkan Quantity">
+                            
+                                <!-- error message untuk nis -->
+                                @error('nis')
+                                    <div class="alert alert-danger mt-2">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <label class="font-weight-bold">BARANG_ID</label>
+                                <select class="form-control" name="barang_id" id="">
+                                    @foreach($barangId as $barangIdrow)
+                                        <option value="{{$barangIdrow->id}}">Merk barang: {{$barangIdrow->merk}} -- Stok sekarang: {{$barangIdrow->stok}}</option>
+                                    @endforeach
+                                </select>
+                            
+                                <!-- error message untuk nis -->
+                                @error('nis')
+                                    <div class="alert alert-danger mt-2">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+
+                            <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
+                            <button type="reset" class="btn btn-md btn-warning">RESET</button>
+
+                        </form> 
+                    </div>
+                </div>
+
+ 
 
             </div>
         </div>
